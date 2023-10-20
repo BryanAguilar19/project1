@@ -1,25 +1,28 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { RegisterUserPage } from './pages/registerUserPage';
+import { Navbar } from './components/navbar';
+import { HomePage } from './pages/homePage';
+import { ListAllTicketsPage } from './pages/listAllTicketsPage';
+import { UnresolvedTicketsPage } from './pages/unresolvedTicketsPage';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+       <Navbar></Navbar>
+       <Routes>
+          <Route path='/' element={<HomePage></HomePage>}></Route>
+          <Route path='/register' element={<RegisterUserPage></RegisterUserPage>}></Route>
+          <Route path='/viewTickets' element={<ListAllTicketsPage></ListAllTicketsPage>}></Route>
+          <Route path='/unresolvedTickets' element={<UnresolvedTicketsPage></UnresolvedTicketsPage>}></Route>
+       </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
