@@ -1,6 +1,11 @@
 import { StdioNull } from "child_process";
 import React, { SyntheticEvent, useState } from "react";
+import { postUserAPI } from "../service/userService";
 
+/**
+ * 
+ * This Page many handles the Create User Page
+ */
 
 // function component named "submitUserForm" for Pages
 export function SubmitUserForm(){
@@ -35,44 +40,31 @@ export function SubmitUserForm(){
         setEmail(box.value);
     }
 
-    function handleSubmit(event: SyntheticEvent) {
-        event.preventDefault(); // Prevent the default form submission behavior
+    function attemptPostAPI(){
+      let user = {
+        userId,
+        username,
+        password,
+        email
       }
+      postUserAPI(user);
+      console.log("User Created!!");
+      alert("The acount '"+ username +"' has been created");
+    }
     //This will render to the User Form (pages)
     return (
         <>
         <div className="center-form">
-            <form onSubmit={handleSubmit}>
             <h1>Creating User</h1>
             <h3>Insert Username</h3>
-            <input
-              type="text"
-              value={username}
-              onChange={updateSetUsername}
-              required
-            />
+            <input value={username} onChange={updateSetUsername} required></input>
             <br />
             <h3>Insert Password</h3>
-            <input
-              type="password"
-              value={password}
-              onChange={updateSetPassword}
-              required
-            />
+            <input value={password} onChange={updateSetPassword} required></input>
             <br />
             <h3>Insert Email</h3>
-            <input
-              type="email"
-              value={email}
-              onChange={updateSetEmail}
-              required
-            />
-            <br />
-            <br />
-            <br />
-            {/*TODO: Need to change the button TYPE to ONCLICK*/}
-            <button className="light-blue-button" type="submit">Create User</button>
-          </form>
+            <input value={email} onChange={updateSetEmail} required></input>
+            <button className="light-blue-button" onClick={attemptPostAPI}>Create User</button>
           </div>
         </>
       );

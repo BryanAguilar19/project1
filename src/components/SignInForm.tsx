@@ -1,5 +1,7 @@
 import React, { SyntheticEvent, useState } from "react";
+import { getUserAPI } from "../service/userService";
 
+//Sign in page
 export function SignInForm(){
     const[username, setUsername] = useState("");
     const[password, setPassword] = useState("");
@@ -13,30 +15,18 @@ export function SignInForm(){
         setPassword(box.value);
     }
 
+    function processLogin(){
+        getUserAPI();
+    }
     return(
         <>
-            <div>
-                <form className="center-form">
+            <div className="center-form">
                     <h1>Sign In</h1>
                     <h3>Username</h3>
-                    <input
-                        type="text"
-                        value={username}
-                        onChange={updateSetUsername}
-                        required
-                    />
-                 <br />
+                    <input value={username} onChange={updateSetUsername}></input>
                     <h3>Password</h3>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={updateSetPassword}
-                        required
-                    />
-                 <br />
-                 <br />
-                 <button className="light-blue-button">Sign In</button>
-                </form>
+                    <input value={password} onChange={updateSetPassword}></input>
+                 <button className="light-blue-button" onClick={processLogin}>Sign In</button>
             </div>
         </>
     );
