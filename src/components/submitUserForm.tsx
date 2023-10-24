@@ -1,6 +1,7 @@
 import { StdioNull } from "child_process";
 import React, { SyntheticEvent, useState } from "react";
 import { postUserAPI } from "../service/userService";
+import { User } from "../models/User";
 
 /**
  * 
@@ -13,8 +14,8 @@ export function SubmitUserForm(){
     const[userId, setUserId] = useState(0);
     const[username, setUsername] = useState("");
     const[password, setPassword] = useState("");
-    const[email, setEmail]= useState("");
-
+    const[email, setEmail] = useState("");
+    const[admin, setAdmin] = useState(false);
     
     // Updating UserID based on user input
     function updateSetUserId (event: SyntheticEvent){
@@ -40,12 +41,19 @@ export function SubmitUserForm(){
         setEmail(box.value);
     }
 
+    // updating "setIsAdmin" based on user input
+    function updateAdmin(event:SyntheticEvent){
+      let box = event.target as HTMLInputElement
+         setAdmin(box.checked);
+    }
+
     function attemptPostAPI(){
       let user = {
-        userId,
-        username,
-        password,
-        email
+        userId: userId,
+        username: username,
+        password: password,
+        email: email,
+        admin: admin
       }
       postUserAPI(user);
       console.log("User Created!!");
@@ -64,6 +72,10 @@ export function SubmitUserForm(){
             <br />
             <h3>Insert Email</h3>
             <input value={email} onChange={updateSetEmail} required></input>
+            <h3>Are you an Admin?</h3>
+            <input type="checkbox" checked={admin} onChange={updateAdmin} />
+            <br />
+            <br />
             <button className="light-blue-button" onClick={attemptPostAPI}>Create User</button>
           </div>
         </>

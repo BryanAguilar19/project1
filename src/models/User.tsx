@@ -3,4 +3,5 @@ export interface User{
     username:string,
     password:any,
     email:string,
+    admin:boolean,
 }

@@ -1,7 +1,7 @@
 import { User } from "../models/User";
 
-export function postUserAPI(User: User){
-    return fetch("http://localhost:8080/user", {
+export async function postUserAPI(User: User){
+    return await fetch("http://localhost:8080/register", {
         mode:"cors",
         method:"POST",
         headers:{
@@ -11,17 +11,18 @@ export function postUserAPI(User: User){
             "content-type":"application/json"
         },
         body:JSON.stringify({
-            id:User.userId,
+            userId:User.userId,
             username:User.username,
             password:User.password,
-            email:User.email
+            email:User.email,
+            admin:User.admin,
         })
     })
 }
 
 export function getUserAPI():Promise<Response>{
 
-    return fetch("http://localhost:8080/user", {
+    return fetch("http://localhost:8080/register", {
         mode:"cors",
         method:"GET",
         headers:{
