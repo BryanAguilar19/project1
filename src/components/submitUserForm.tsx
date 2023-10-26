@@ -57,6 +57,8 @@ export function SubmitUserForm(){
       }
       postUserAPI(user);
       console.log("User Created!!");
+      console.log("admin status: " , admin)
+      console.log("username: ", username)
       alert("The acount '"+ username +"' has been created");
     }
     //This will render to the User Form (pages)
